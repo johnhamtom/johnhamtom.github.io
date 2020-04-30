@@ -7,13 +7,13 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>标签: hello world - ZYT</title>
+<title>标签: c - ZYT</title>
 
 
     <meta name="description" content="个人博客，记录生活与学习">
 <meta property="og:type" content="website">
 <meta property="og:title" content="ZYT">
-<meta property="og:url" content="https://johnhamtom.github.io/tags/hello-world/">
+<meta property="og:url" content="https://johnhamtom.github.io/tags/c/">
 <meta property="og:site_name" content="ZYT">
 <meta property="og:description" content="个人博客，记录生活与学习">
 <meta property="og:locale" content="zh_CN">
@@ -131,7 +131,7 @@
         <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
             <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">hello world</a></li>
+            <li class="is-active"><a href="#" aria-current="page">c</a></li>
         </ul>
         </nav>
     </div>
@@ -144,13 +144,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-21T02:19:19.000Z">2020-03-21</time>
+                <time class="level-item has-text-grey" datetime="2020-04-30T01:13:19.000Z">2020-04-30</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/leetcode/">leetcode</a>
+                </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 147 个字)
+                    3 分钟 读完 (大约 448 个字)
                 </span>
                 
                 
@@ -159,21 +163,34 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2020/03/21/Hello%20world/">Hello world</a>
+                <a class="has-link-black-ter" href="/2020/04/30/leetcode-%E7%AE%97%E6%B3%95-35/">leetcode-算法-35</a>
             
         </h1>
         <div class="content">
-            <h1 id="Hello-world"><a href="#Hello-world" class="headerlink" title="Hello world"></a>Hello world</h1><pre><code>#include &lt;stdio.h&gt;
- int main()
-{
-printf(&quot;Hello, World!&quot;);  
-return 0;
- }</code></pre><hr>
-<p>每次初学一门编程语言，无论是python ， C 还是 java ，老师总是会教我们先在编译器上输出 “Hello world” , 久而久之 “Hello world” 这句话对于我而言就带有一种特殊的味道 ， 所以在这，我也打算使用 Hello world 来作为我的第一个正式的个人博客的标题，同时这也是我第一次使用markdom来编写文章，这一切，仅仅是一个开始。</p>
+            <h1 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h1><p>搜索插入位置<br><br>给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。</p>
+<p>你可以假设数组中无重复元素。</p>
+<p>示例 1:</p>
+<p>输入: [1,3,5,6], 5<br>输出: 2<br><br><br>示例 2:</p>
+<p>输入: [1,3,5,6], 2<br>输出: 1<br><br><br>示例 3:</p>
+<p>输入: [1,3,5,6], 7<br>输出: 4<br><br><br>示例 4:</p>
+<p>输入: [1,3,5,6], 0<br>输出: 0</p>
+<hr>
+<h2 id="方法一：暴力求解法"><a href="#方法一：暴力求解法" class="headerlink" title="方法一：暴力求解法"></a>方法一：暴力求解法<br></h2><p>由题意得到是递增的排序数组<br>故：基本思路为target依次的跟数组的数据比较大小，若遇到相等的或者比target大的（这样说明后面的数据都比target大）返回当前比较的下标，如果都没有符合条件的，则在数组末尾插入数据，返回numsSize。<br><br><br>时间复杂度：O(n)–空间复杂度O(1)</p>
 </p>
 
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int searchInsert(int* nums, int numsSize, int target)&#123;</span><br><span class="line">    for(int i&#x3D;0;i&lt;numsSize;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        if(target&lt;&#x3D; nums[i]) return i;</span><br><span class="line">    &#125;</span><br><span class="line">    return numsSize;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
-<p><img src="https://s1.ax1x.com/2020/03/21/8WNkOe.png" alt="a"></p>
+<h2 id="方法二：折半查找法"><a href="#方法二：折半查找法" class="headerlink" title="方法二：折半查找法"></a>方法二：折半查找法<br></h2><p>利用折半法解决，主要思路：<br><br>初始化：三个指针，l与h指针指向数组的上下界，m指针指向中间（h+l）/2<br><br>target跟nums[m]比较大小，比它大就l指针后移，比它小就h指针前移。<br><br>直到查到target 或者 m指针遍历完target左右的数字发现没有符合条件的。<br><br><br>时间复杂度：O(logn)–空间复杂度O(1)</p>
+</p>
+---
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">int searchInsert(int* nums, int numsSize, int target)&#123;</span><br><span class="line">    int l &#x3D; 0;</span><br><span class="line">    int h &#x3D; numsSize -1;</span><br><span class="line">    int m;</span><br><span class="line">    while(h&gt;&#x3D;l)&#123;</span><br><span class="line">        m &#x3D; (h+l)&#x2F;2;</span><br><span class="line">        if(nums[m] &lt; target) l &#x3D; m+1;</span><br><span class="line">        if(nums[m] &gt; target) h &#x3D; m-1;</span><br><span class="line">        if(nums[m] &#x3D;&#x3D; target) return m;</span><br><span class="line">    &#125;</span><br><span class="line">    return l;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+注：转自我写在leetcode的算法题解<br>
+链接：https://leetcode-cn.com/problems/search-insert-position/solution/35-sou-suo-cha-ru-wei-zhi-li-yong-zhe-ban-fa-jie-j/
+<br>
+来源：力扣（LeetCode）
+
+
+
 
         </div>
         
