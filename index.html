@@ -30,7 +30,7 @@
 
 
 
-<link rel="icon" href="/images/favicon.svg">
+<link rel="icon" href="/images/favicon.jpg">
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
@@ -80,7 +80,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="johnhamtom" height="28">
+                <img src="/images/logo.jpg" alt="johnhamtom" height="28">
             
             </a>
         </div>
@@ -89,19 +89,16 @@
             <div class="navbar-start">
                 
                 <a class="navbar-item is-active"
-                href="/">Home</a>
+                href="/">主页</a>
                 
                 <a class="navbar-item"
-                href="/archives">Archives</a>
+                href="/archives">归档</a>
                 
                 <a class="navbar-item"
-                href="/categories">Categories</a>
+                href="/categories">分类</a>
                 
                 <a class="navbar-item"
-                href="/tags">Tags</a>
-                
-                <a class="navbar-item"
-                href="/about">About</a>
+                href="/tags">标签</a>
                 
             </div>
             
@@ -137,13 +134,13 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-22T09:21:18.050Z">2020-03-22</time>
+                <time class="level-item has-text-grey" datetime="2020-04-30T01:13:19.000Z">2020-04-30</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    几秒 读完 (大约 0 个字)
+                    3 分钟 读完 (大约 448 个字)
                 </span>
                 
                 
@@ -152,11 +149,35 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2020/03/22/Untitled-1/">Untitled-1</a>
+                <a class="has-link-black-ter" href="/2020/04/30/leetcode-%E7%AE%97%E6%B3%95-35/">article title</a>
             
         </h1>
         <div class="content">
-            
+            <h1 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h1><p>搜索插入位置<br><br>给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。</p>
+<p>你可以假设数组中无重复元素。</p>
+<p>示例 1:</p>
+<p>输入: [1,3,5,6], 5<br>输出: 2<br><br><br>示例 2:</p>
+<p>输入: [1,3,5,6], 2<br>输出: 1<br><br><br>示例 3:</p>
+<p>输入: [1,3,5,6], 7<br>输出: 4<br><br><br>示例 4:</p>
+<p>输入: [1,3,5,6], 0<br>输出: 0</p>
+<hr>
+<h2 id="方法一：暴力求解法"><a href="#方法一：暴力求解法" class="headerlink" title="方法一：暴力求解法"></a>方法一：暴力求解法<br></h2><p>由题意得到是递增的排序数组<br>故：基本思路为target依次的跟数组的数据比较大小，若遇到相等的或者比target大的（这样说明后面的数据都比target大）返回当前比较的下标，如果都没有符合条件的，则在数组末尾插入数据，返回numsSize。<br><br><br>时间复杂度：O(n)–空间复杂度O(1)</p>
+</p>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int searchInsert(int* nums, int numsSize, int target)&#123;</span><br><span class="line">    for(int i&#x3D;0;i&lt;numsSize;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        if(target&lt;&#x3D; nums[i]) return i;</span><br><span class="line">    &#125;</span><br><span class="line">    return numsSize;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="方法二：折半查找法"><a href="#方法二：折半查找法" class="headerlink" title="方法二：折半查找法"></a>方法二：折半查找法<br></h2><p>利用折半法解决，主要思路：<br><br>初始化：三个指针，l与h指针指向数组的上下界，m指针指向中间（h+l）/2<br><br>target跟nums[m]比较大小，比它大就l指针后移，比它小就h指针前移。<br><br>直到查到target 或者 m指针遍历完target左右的数字发现没有符合条件的。<br><br><br>时间复杂度：O(logn)–空间复杂度O(1)</p>
+</p>
+---
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">int searchInsert(int* nums, int numsSize, int target)&#123;</span><br><span class="line">    int l &#x3D; 0;</span><br><span class="line">    int h &#x3D; numsSize -1;</span><br><span class="line">    int m;</span><br><span class="line">    while(h&gt;&#x3D;l)&#123;</span><br><span class="line">        m &#x3D; (h+l)&#x2F;2;</span><br><span class="line">        if(nums[m] &lt; target) l &#x3D; m+1;</span><br><span class="line">        if(nums[m] &gt; target) h &#x3D; m-1;</span><br><span class="line">        if(nums[m] &#x3D;&#x3D; target) return m;</span><br><span class="line">    &#125;</span><br><span class="line">    return l;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+注：转自我写在leetcode的算法题解<br>
+链接：https://leetcode-cn.com/problems/search-insert-position/solution/35-sou-suo-cha-ru-wei-zhi-li-yong-zhe-ban-fa-jie-j/
+<br>
+来源：力扣（LeetCode）
+
+
+
+
         </div>
         
         
@@ -292,7 +313,7 @@ return 0;
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            1
+                            2
                         </p>
                     </a>
                 </div>
@@ -405,7 +426,7 @@ return 0;
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/hello-world/" style="font-size: 10px;">hello world</a>
+        <a href="/tags/hello-world/" style="font-size: 10px;">hello world</a> <a href="/tags/leetcode-%E7%AE%97%E6%B3%95-c-%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95/" style="font-size: 10px;">leetcode,算法,c,查找算法</a>
     </div>
 </div>
     
@@ -420,16 +441,16 @@ return 0;
         
         <article class="media">
             
-            <a href="/2020/03/22/Untitled-1/" class="media-left">
+            <a href="/2020/04/30/leetcode-%E7%AE%97%E6%B3%95-35/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Untitled-1">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="article title">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-22T09:21:18.050Z">2020-03-22</time></div>
-                    <a href="/2020/03/22/Untitled-1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Untitled-1</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-30T01:13:19.000Z">2020-04-30</time></div>
+                    <a href="/2020/04/30/leetcode-%E7%AE%97%E6%B3%95-35/" class="title has-link-black-ter is-size-6 has-text-weight-normal">article title</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -468,12 +489,23 @@ return 0;
         <ul class="menu-list">
         
         <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
             <a class="level is-marginless" href="/archives/2020/03/">
                 <span class="level-start">
                     <span class="level-item">三月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -494,6 +526,13 @@ return 0;
                 <div class="control">
                     <a class="tags has-addons" href="/tags/hello-world/">
                         <span class="tag">hello world</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/leetcode-%E7%AE%97%E6%B3%95-c-%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95/">
+                        <span class="tag">leetcode,算法,c,查找算法</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -522,16 +561,16 @@ return 0;
         
         <article class="media">
             
-            <a href="/2020/03/22/Untitled-1/" class="media-left">
+            <a href="/2020/04/30/leetcode-%E7%AE%97%E6%B3%95-35/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Untitled-1">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="article title">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-22T09:21:18.050Z">2020-03-22</time></div>
-                    <a href="/2020/03/22/Untitled-1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Untitled-1</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-30T01:13:19.000Z">2020-04-30</time></div>
+                    <a href="/2020/04/30/leetcode-%E7%AE%97%E6%B3%95-35/" class="title has-link-black-ter is-size-6 has-text-weight-normal">article title</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -570,12 +609,23 @@ return 0;
         <ul class="menu-list">
         
         <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
             <a class="level is-marginless" href="/archives/2020/03/">
                 <span class="level-start">
                     <span class="level-item">三月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -600,6 +650,13 @@ return 0;
                     </a>
                 </div>
                 
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/leetcode-%E7%AE%97%E6%B3%95-c-%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95/">
+                        <span class="tag">leetcode,算法,c,查找算法</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
             </div>
         </div>
     </div>
@@ -617,7 +674,7 @@ return 0;
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="johnhamtom" height="28">
+                    <img src="/images/logo.jpg" alt="johnhamtom" height="28">
                 
                 </a>
                 <p class="is-size-7">
